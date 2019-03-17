@@ -2,7 +2,8 @@
 
 class Lists extends CI_Model
 {
-    public function getLists()
+    //gets all Lists data from db
+    public function getAll()
     {
         $dbdata = array();
         $this->db->from('Lists');
@@ -18,5 +19,23 @@ class Lists extends CI_Model
             }
         }
         return $dbdata;
+    }
+
+
+    public function insert($data)
+    {
+        $this->db->insert('Lists', $data);
+    }
+
+    public function update($id, $data)
+    {
+        $this->db->where('list_id', $id);
+        $this->db->update('Lists', $data);
+    }
+
+    public function delete($id)
+    {
+        $this->db->where('list_id', $id);
+        $this->db->delete('Lists');
     }
 }

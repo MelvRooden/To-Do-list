@@ -2,7 +2,8 @@
 
 class Items extends CI_Model
 {
-    public function getItems()
+    //gets all Items data from db
+    public function getAll()
     {
         $dbdata = array();
         $this->db->from('Items');
@@ -21,5 +22,23 @@ class Items extends CI_Model
             }
         }
         return $dbdata;
+    }
+
+
+    public function insert($data)
+    {
+        $this->db->insert('Items', $data);
+    }
+
+    public function update($id, $data)
+    {
+        $this->db->where('item_id', $id);
+        $this->db->update('Items', $data);
+    }
+
+    public function delete($id)
+    {
+        $this->db->where('item_id', $id);
+        $this->db->delete('Items');
     }
 }
