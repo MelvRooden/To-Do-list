@@ -34,8 +34,8 @@ class Main extends CI_Controller {
     {
         if (!empty($_POST)) {
             $list_name = $this->input->post('createListName');
-            $list_status = $this->input->post('createListDetails');;
-            if ($list_name && $list_status) {
+            $list_status = $this->input->post('createListStatus');;
+            if ($list_name) {
                 $data = array(
                     'list_name' => $list_name,
                     'list_status' => $list_status
@@ -53,10 +53,10 @@ class Main extends CI_Controller {
     public function updateList()
     {
         if (!empty($_POST)) {
-            $list_id = $this->input->post('newListId');
-            $list_name = $this->input->post('newListName');
-            $list_status = $this->input->post('newListStatus');;
-            if ($list_id && $list_name && $list_status) {
+            $list_id = $this->input->post('updateListId');
+            $list_name = $this->input->post('updateListName');
+            $list_status = $this->input->post('updateListStatus');
+            if ($list_id && $list_name) {
                 $data = array(
                     'list_id' => $list_id,
                     'list_name' => $list_name,
@@ -64,7 +64,7 @@ class Main extends CI_Controller {
                 );
             }
             $this->load->model('Lists');
-            $this->Lists->update($data);
+            $this->Lists->update($data["list_id"], $data);
             redirect(base_url('/Main/index'));
         } else {
             $this->error('An error occurred while trying to update a List');
@@ -103,7 +103,7 @@ class Main extends CI_Controller {
                     'item_time' => $item_time
                 );
             }
-            var_dump($list_id, $item_name, $item_details, $item_status, $item_time);
+            var_dump($list_id, $item_name, $item_details);
             $this->load->model('Items');
             $this->Items->insert($data);
             redirect(base_url('/Main/index'));
@@ -133,7 +133,7 @@ class Main extends CI_Controller {
                 );
             }
             $this->load->model('Items');
-            $this->Items->update($data);
+            $this->Items->update($data["item_id"], $data);
             redirect(base_url('Main/index'));
         } else {
             $this->error('An error occurred while trying to update an Item');
