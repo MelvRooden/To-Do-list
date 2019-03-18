@@ -94,7 +94,7 @@ class Main extends CI_Controller {
             $item_details = $this->input->post('createItemDetails');
             $item_status = $this->input->post('createItemStatus');
             $item_time = $this->input->post('createItemTime');
-            if ($list_id && $item_name && $item_details && $item_status && $item_time) {
+            if ($list_id && $item_name && $item_details) {
                 $data = array(
                     'list_id' => $list_id,
                     'item_name' => $item_name,
@@ -103,6 +103,7 @@ class Main extends CI_Controller {
                     'item_time' => $item_time
                 );
             }
+            var_dump($list_id, $item_name, $item_details, $item_status, $item_time);
             $this->load->model('Items');
             $this->Items->insert($data);
             redirect(base_url('/Main/index'));
@@ -121,7 +122,7 @@ class Main extends CI_Controller {
             $item_details = $this->input->post('updateItemDetails');
             $item_status = $this->input->post('updateItemStatus');
             $item_time = $this->input->post('updateItemTime');
-            if ($item_id && $list_id && $item_name && $item_details && $item_status && $item_time) {
+            if ($item_id && $list_id && $item_name && $item_details) {
                 $data = array(
                     'item_id' => $item_id,
                     'list_id' => $list_id,

@@ -18,7 +18,7 @@
                             <div class="list-group-item p-0">
                                 <div style="width:10px;" class="container">
                                     <div class="row">
-                                        <a class="col p-0 pl-2" style="font-size:10px;" onclick="setupListUpdate">✎</a>
+                                        <a class="col p-0 pl-2" style="font-size:10px;" onclick="setupListUpdate()">✎</a>
                                         <a class="col p-0 pl-2" style="font-size:10px;" href="<?php echo base_url("Main/deleteList/"). $list['list_id']?>">❌</a>
                                     </div>
                                 </div>
@@ -35,7 +35,7 @@
                                     <div class="list-group-item p-0">
                                         <div style="width:10px;" class="container">
                                             <div class="row">
-                                                <a class="col p-0 pl-2" style="font-size:10px;" onclick="setUpItemUpdate(<?php $item ?>)" data-toggle="modal">✎</a>
+                                                <a class="col p-0 pl-2" style="font-size:10px;" onclick="setUpItemUpdate(<?php $item ?>)" data-toggle="modal" href="#">✎</a>
                                                 <a class="col p-0 pl-2" style="font-size:10px;" href="<?php echo base_url("Main/deleteItem/"). $item['item_id']?>">❌</a>
                                             </div>
                                         </div>
@@ -83,29 +83,29 @@
         </div>
     </div>
     <!------------List update------------>
-<!--    <div class="modal fade" id="UpdateList" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">-->
-<!--        <div class="modal-dialog" role="document">-->
-<!--            <div class="modal-content">-->
-<!--                <div class="modal-header">-->
-<!--                    <h5 class="modal-title" id="newListTitle">New List</h5>-->
-<!--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-<!--                        <span aria-hidden="true">&times;</span>-->
-<!--                    </button>-->
-<!--                </div>-->
-<!--                <form action="--><?php //echo base_url('Main/updateList/') ?><!--" method="post">-->
-<!--                    <div class="modal-body">-->
-<!--                        <input name="updateListId" type="number" placeholder="" required hidden>-->
-<!--                        <p class="mb-0 mt-2">Title</p><input name="updateListName" type="text" class="form-control" placeholder="Title" required>-->
-<!--                        <p class="mb-0 mt-2">Details</p><input name="updateListDetails" type="text" class="form-control" placeholder="Details">-->
-<!--                    </div>-->
-<!--                    <div class="modal-footer">-->
-<!--                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
-<!--                        <button type="submit" class="btn btn-primary">Save List</button>-->
-<!--                    </div>-->
-<!--                </form>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
+    <div class="modal fade" id="UpdateList" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newListTitle">New List</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="<?php echo base_url('Main/updateList/') ?>" method="post">
+                    <div class="modal-body">
+                        <input name="updateListId" type="number" placeholder="" required hidden>
+                        <p class="mb-0 mt-2">Title</p><input name="updateListName" type="text" class="form-control" placeholder="Title" required>
+                        <p class="mb-0 mt-2">Details</p><input name="updateListDetails" type="text" class="form-control" placeholder="Details">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save List</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 
     <!------------Item create------------>
@@ -169,30 +169,32 @@
 </main>
 
 <script>
-    // gives the list_id to the item add form
+    function setupListUpdate(updateListData) {
+        document.getElementById("").value = updateListData[0];
+        document.getElementById("").value = updateListData[1];
+        document.getElementById("").value = updateListData[1];
+        document.getElementById("").value = updateListData[2];
+        document.getElementById("").value = updateListData[2];
+    }
+
     function setUpItemCreate(createItemListId, createItemName)
     {
         document.getElementById("createItemListId").value = createItemListId;
         document.getElementById("createItemName").innerText = createItemName;
     }
-    // function setUpItemUpdate(updateItemData)
-    // {
-    //     document.getElementById("updateItemId").value = updateItemData[0];
-    //     document.getElementById("updateItemListId").value = updateItemData[1];
-    //     document.getElementById("updateItemName").value = updateItemData[2];
-    //     document.getElementById("updateItemName").placeholder = updateItemData[2];
-    //     document.getElementById("updateItemDetails").value = updateItemData[3];
-    //     document.getElementById("updateItemDetails").placeholder = updateItemData[3];
-    //     document.getElementById("updateItemStatus").value = updateItemData[4];
-    //     document.getElementById("updateItemStatus").placeholder = updateItemData[4];
-    //     document.getElementById("updateItemTime").value = updateItemData[5];
-    //     document.getElementById("updateItemTime").placeholder = updateItemData[5];
-    // }
-    // function setupListUpdate(updateListData) {
-    //     document.getElementById("").value = updateListData[];
-    //     document.getElementById("").value = updateListData[];
-    //     document.getElementById("").value = updateListData[];
-    //     document.getElementById("").value = updateListData[];
-    //     document.getElementById("").value = updateListData[];
-    // }
+
+    function setUpItemUpdate(updateItemData)
+    {
+        document.getElementById("updateItemId").value = updateItemData[0];
+        document.getElementById("updateItemListId").value = updateItemData[1];
+        document.getElementById("updateItemName").value = updateItemData[2];
+        document.getElementById("updateItemName").placeholder = updateItemData[2];
+        document.getElementById("updateItemDetails").value = updateItemData[3];
+        document.getElementById("updateItemDetails").placeholder = updateItemData[3];
+        document.getElementById("updateItemStatus").value = updateItemData[4];
+        document.getElementById("updateItemStatus").placeholder = updateItemData[4];
+        document.getElementById("updateItemTime").value = updateItemData[5];
+        document.getElementById("updateItemTime").placeholder = updateItemData[5];
+    }
+
 </script>
