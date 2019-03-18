@@ -35,7 +35,7 @@
                                     <div class="list-group-item p-0">
                                         <div style="width:10px;" class="container">
                                             <div class="row">
-                                                <a class="col p-0 pl-2" style="font-size:10px;" href="#" onclick="setUpItemUpdate(<?php echo $item["item_id"] ?>, <?php $item["list_id"] ?>, '<?php $item["item_name"] ?>', '<?php $item["item_details"] ?>', <?php $item["item_status"] ?>, <?php $item["item_time"] ?>)" data-toggle="modal" data-target="#updateItem">✎</a>
+                                                <a class="col p-0 pl-2" style="font-size:10px;" href="#" onclick="setUpItemUpdate(<?php echo $item["item_id"] ?>, <?php echo $item["list_id"] ?>, '<?php echo $item["item_name"] ?>', '<?php echo $item["item_details"] ?>', <?php echo $item["item_status"] ?>, <?php echo $item["item_time"] ?>)" data-toggle="modal" data-target="#updateItem">✎</a>
                                                 <a class="col p-0 pl-2" style="font-size:10px;" href="<?php echo base_url("Main/deleteItem/"). $item['item_id']?>">❌</a>
                                             </div>
                                         </div>
@@ -169,7 +169,7 @@
 </main>
 
 <script>
-    
+
     function setupListUpdate(updateListId, updateListName, updateListStatus)
     {
         document.getElementById("updateListId").value = updateListId;

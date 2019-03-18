@@ -116,7 +116,7 @@ class Main extends CI_Controller {
     public function updateItem()
     {
         if (!empty($_POST)) {
-            $item_id = $this->input->post('updateList');
+            $item_id = $this->input->post('updateItemId');
             $list_id = $this->input->post('updateItemListId');
             $item_name = $this->input->post('updateItemName');
             $item_details = $this->input->post('updateItemDetails');
