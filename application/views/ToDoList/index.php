@@ -3,8 +3,9 @@
         <div class="btn-primary active">
             <h1 class="m-0 pl-4 d-inline">ToDo</h1>
         </div>
-        <div class="bg-primary">
-            <p class="m-0 pl-4">Welcome back!</p>
+        <div class="bg-primary row">
+            <p class="col m-0 pl-4">Welcome back!</p>
+            <a class="col btn-primary ml-0" href="<?php (base_url('/Main/index')) ?>">Sort</a>
         </div>
     </div>
 
@@ -30,18 +31,19 @@
                 <ul class="list-unstyled overflow-auto mh-80">
                     <?php foreach ($itemData as $item): ?>
                         <?php if ($item["list_id"] === $list["list_id"]) { ?>
-                            <li class="list-group-item pb-3"><p class="d-inline"><?php echo $item["item_name"] ?></p>
-                                <div class="d-inline float-right">
-                                    <div class="list-group-item p-0">
-                                        <div style="width:10px;" class="container">
-                                            <div class="row">
-                                                <a class="col p-0 pl-2" style="font-size:10px;" href="#" onclick="setUpItemUpdate(<?php echo $item["item_id"] ?>, <?php echo $item["list_id"] ?>, '<?php echo $item["item_name"] ?>', '<?php echo $item["item_details"] ?>', <?php echo $item["item_status"] ?>, <?php echo $item["item_time"] ?>)" data-toggle="modal" data-target="#updateItem">✎</a>
-                                                <a class="col p-0 pl-2" style="font-size:10px;" href="<?php echo base_url("Main/deleteItem/"). $item['item_id']?>">❌</a>
+                                <li class="list-group-item pb-3">
+                                    <a onclick="setUpItemDetails('<?php echo $item["item_name"] ?>', '<?php echo $item["item_details"] ?>', <?php echo $item["item_status"] ?>, <?php echo $item["item_time"] ?>)" href="#" data-toggle="modal" data-target="#itemDetailsShow"><p class="d-inline text-dark"><?php echo $item["item_name"] ?></p></a>
+                                    <div class="d-inline float-right">
+                                        <div class="list-group-item p-0">
+                                            <div style="width:10px;" class="container">
+                                                <div class="row">
+                                                    <a class="col p-0 pl-2" style="font-size:10px;" href="#" onclick="setUpItemUpdate(<?php echo $item["item_id"] ?>, <?php echo $item["list_id"] ?>, '<?php echo $item["item_name"] ?>', '<?php echo $item["item_details"] ?>', <?php echo $item["item_status"] ?>, <?php echo $item["item_time"] ?>)" data-toggle="modal" data-target="#updateItem">✎</a>
+                                                    <a class="col p-0 pl-2" style="font-size:10px;" href="<?php echo base_url("Main/deleteItem/"). $item['item_id']?>">❌</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </li>
+                                </li>
                         <?php } ?>
                     <?php endforeach; ?>
                     <li class="list-group-item pb-2"><a onclick="setUpItemCreate(<?php echo $list["list_id"]?>, '<?php echo $list["list_name"] ?>')"
@@ -154,7 +156,7 @@
                         <input id="updateItemListId" name="updateItemListId" type="number" placeholder="ID" required hidden>
                         <p class="mb-0 mt-2">Title</p><input id="updateItemName" name="updateItemName" type="text" class="form-control" placeholder="Title" required>
                         <p class="mb-0 mt-2">Details</p><input id="updateItemDetails" name="updateItemDetails" type="text" class="form-control h-20" placeholder="Details">
-                        <p class="mb-0 mt-2">Status</p><input id="updateItemStatus" value="0" name="updateItemStatus"  type="number" min="0" max="1" class="form-control h-20" placeholder="Details" required hidden>
+                        <p class="mb-0 mt-2">Status</p><input id="updateItemStatus" value="0" name="updateItemStatus"  type="number" min="0" max="1" class="form-control h-20" placeholder="Details" required>
                         <p class="mb-0 mt-2">Estimated time</p><input id="updateItemTime" name="updateItemTime" type="number" min="0" class="form-control" placeholder="Minutes">
                     </div>
                     <div class="modal-footer">
@@ -166,9 +168,53 @@
         </div>
     </div>
 
+    <!------------Item Details Show------------>
+    <div class="modal fade" id="itemDetailsShow" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="detailsItemName" class="modal-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-0 mt-2">Details</p><p id="detailsItemDetails" class="mb-0 mt-0"></p>
+                    <p class="mb-0 mt-2">Status</p><p id="detailsItemStatus" class="mb-0 mt-0"></p>
+                    <p class="mb-0 mt-2">Estimated Time</p><p id="detailsItemItem" class="mb-0 mt-0"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </main>
 
 <script>
+
+    function setUpItemDetails(detailsItemName, detailsItemDetails, detailsItemStatus, detailsItemTime)
+    {
+        document.getElementById("detailsItemName").innerText = detailsItemName;
+        document.getElementById("detailsItemDetails").innerText = detailsItemDetails;
+        document.getElementById("detailsItemItem").innerText = detailsItemTime;
+        if (detailsItemStatus === 0) {
+            document.getElementById("detailsItemStatus").innerText = "Not Done";
+            document.getElementById("detailsItemStatus").classList.remove = "bg-success";
+            document.getElementById("detailsItemStatus").classList.add = "bg-danger";
+
+        } else if (detailsItemStatus === 1) {
+            document.getElementById("detailsItemStatus").innerText = "Done";
+            document.getElementById("detailsItemStatus").classList.remove = "bg-danger";
+            document.getElementById("detailsItemStatus").classList.add = "bg-success";
+
+        } else {
+            // data-dismiss="modal";
+            alert("Oops! Something went wrong.");
+
+        }
+    }
 
     function setupListUpdate(updateListId, updateListName, updateListStatus)
     {

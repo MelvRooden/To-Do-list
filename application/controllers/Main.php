@@ -6,16 +6,21 @@ class Main extends CI_Controller {
     //loads the page and sends all data received data with it
     public function index()
     {
+        $orderNumber = 0;
+        if ($orderNumber === 2) {
+            $orderNumber = 0;
+        }
         $this->load->model('Lists');
         $listData = $this->Lists->getAll();
 
         $this->load->model('Items');
-        $itemData = $this->Items->getAll();
+        $itemData = $this->Items->getAll($orderNumber);
 
         $data = array(
             "listData" => $listData,
             "itemData" => $itemData
         );
+        $orderNumber++;
         $this->load->view('Templates/header');
         $this->load->view('ToDoList/index' , $data);
         $this->load->view('Templates/footer');

@@ -3,11 +3,12 @@
 class Items extends CI_Model
 {
     //gets all Items data from db
-    public function getAll()
+    public function getAll($orderNumber)
     {
+        $order = array('asc', 'desc');
         $dbdata = array();
         $this->db->from('Items');
-        $this->db->select('*');
+        $this->db->order_by('item_name', $order[$orderNumber]);
         $query = $this->db->get();
         if ($query->num_rows()) {
             foreach ($query->result_array() as $row) {
